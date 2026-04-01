@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raihan Alfiansyah Siswa SMK Telkom Lampung</title>
+    
+    <meta name="description" content=" Raihan Alfiansyah - Ketua OSIS SMK Telkom Lampung & Software Developer.">
+<meta property="og:title" content="Raihan Alfiansyah Siswa SMK Telkom Lampung">
+    <meta property="og:description" content="Siswa SMK Telkom Lampung & Atlet Pencak Silat.">
+    <meta property="og:image" content="PP1.jpeg">
+    <meta name="theme-color" content="#A855F7">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect x=%2220%22 y=%2220%22 width=%2212%22 height=%2260%22 rx=%222%22 fill=%22%23A855F7%22/><path d=%22M32 20H55C65 20 70 28 70 37C70 46 65 52 55 52H32V20Z%22 fill=%22%23A855F7%22/><path d=%22M45 52L70 80H55L32 52H45Z%22 fill=%22%23A855F7%22/></svg>">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: { 
+                    colors: { accent: '#A855F7', darkcard: '#111827' },
+                    animation: { 'pulse-slow': 'pulse 3s infinite' }
+                } 
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(180deg, #000000 0%, #1e0b44 100%);
+            color: #F3F4F6; margin: 0; overflow-x: hidden;
+            cursor: none;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Cursor */
+        #cursor-dot { width: 8px; height: 8px; background: #A855F7; position: fixed; border-radius: 50%; pointer-events: none; z-index: 10005; box-shadow: 0 0 10px #A855F7; }
+        #cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(168,85,247,0.5); position: fixed; border-radius: 50%; pointer-events: none; z-index: 10004; transition: all 0.1s ease-out; }
+
+        /* 3D Tilt Card */
+        .perspective-1000 { perspective: 1000px; }
+        #id-card { transform-style: preserve-3d; transition: transform 0.1s ease-out; }
+
+        #progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 10001; background: rgba(168, 85, 247, 0.1); }
+        #progress-bar { height: 100%; background: #A855F7; width: 0%; box-shadow: 0 0 10px #A855F7; }
+        
+        section { display: none; min-height: 100vh; padding-bottom: 140px; }
+        section.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .float-contact { position: fixed; right: 20px; bottom: 100px; z-index: 9998; }
+
+        #toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+            background: rgba(168, 85, 247, 0.9); color: white; padding: 10px 20px;
+            border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 10002;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
+
+        #main-nav {
+            position: fixed; bottom: 25px; left: 50%; transform: translate(-50%, 150%);
+            width: 92%; max-width: 480px; z-index: 9999; opacity: 0; pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+        }
+        #main-nav.visible { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+        .nav-btn.active { color: #A855F7; transform: translateY(-3px); }
+
+        .glass-modal {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .glass-modal.active { display: flex; animation: fadeIn 0.3s ease; }
+
+        @media (max-width: 768px) { body { cursor: auto; } #cursor-dot, #cursor-outline { display: none; } }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+    <div id="toast">Membuka Instagram @raihn.alfy...</div>
+
+    <div class="float-contact" data-aos="fade-left">
+        <a href="https://instagram.com/raihn.alfy" target="_blank" onclick="showToast()" class="glass w-14 h-14 rounded-full flex items-center justify-center text-accent shadow-2xl border-accent/40 hover:scale-110 transition-transform">
+            <i class="fab fa-instagram text-2xl"></i>
+        </a>
+    </div>
+
+    <section id="home" class="active p-6 pt-12 text-center">
+        <div class="max-w-md mx-auto">
+            
+            <div class="perspective-1000 mb-10" data-aos="zoom-in">
+                <div id="id-card" class="glass rounded-[2.5rem] p-8 relative shadow-2xl border border-white/10 overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-accent/20 blur-3xl rounded-full"></div>
+                    
+                    <div class="swiper profileSwiper w-44 h-44 mx-auto rounded-full border-4 border-darkcard overflow-hidden relative z-10 shadow-2xl mb-6">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="PP1.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="swiper-slide"><img src="PP2.jpeg" class="w-full h-full object-cover"></div>
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-3xl font-extrabold uppercase tracking-tight text-white mb-2">Raihan Alfiansyah</h1>
+                    <div class="inline-block px-4 py-1 bg-accent/10 border border-accent/30 rounded-full">
+                        <p class="text-accent font-bold text-[10px] tracking-[0.2em] uppercase">Verified Student Identity</p>
+                    </div>
+
+                    <div class="mt-10 space-y-3 text-left">
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-[9px] text-slate-500 uppercase font-bold">Role</span>
+                            <span class="text-[11px] font-bold">Ketua OSIS SMK Telkom</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-[9px] text-slate-500 uppercase font-bold">Specialist</span>
+                            <span class="text-[11px] font-bold text-accent">Software Engineer</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-[9px] text-slate-500 uppercase font-bold">Location</span>
+                            <span class="text-[11px] font-bold italic">Lampung, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center shadow-xl mb-12" data-aos="fade-up">
+                <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-4">Education Journey</p>
+                <div class="flex flex-col gap-1">
+                    <span class="text-[10px] text-slate-400">RA Radhatul Huda • MI Baabussalaam</span>
+                    <span class="text-[11px] text-accent font-extrabold italic">MTs Baabussalaam • SMK Telkom Lampung</span>
+                </div>
+            </div>
+
+            <div class="text-left">
+                <h3 class="text-lg font-bold mb-5 flex items-center">
+                    <span class="w-2 h-6 bg-accent inline-block mr-3 rounded-full shadow-[0_0_10px_#A855F7]"></span>Achievements
+                </h3>
+                <div class="swiper prestasiSwiper rounded-3xl overflow-hidden h-80 shadow-2xl border border-white/10" data-aos="flip-up">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide relative">
+                            <img src="PRES 2.jpeg" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6">
+                                <p class="text-white text-sm font-bold leading-tight uppercase">Ketua Osis SMK Telkom Lampung <br><span class="text-accent">2025-2026</span></p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="PRES 1.jpeg" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6">
+                                <p class="text-white text-sm font-bold uppercase">Gold Medalist <br><span class="text-accent">Pencak Silat Championship</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                
+                <button onclick="showSection('about')" class="w-full text-center text-slate-500 text-[10px] mt-16 animate-bounce tracking-widest uppercase block">
+                    Scroll down for details ⬇
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="p-6 pt-16">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-4xl font-extrabold uppercase mb-10 tracking-tighter" data-aos="fade-down">About Me</h2>
+            <div class="glass p-8 rounded-[2.5rem] mb-8 shadow-2xl" data-aos="fade-up">
+                <p class="text-slate-300 text-sm leading-relaxed mb-8">
+                    Halo! Saya <span class="text-accent font-bold">Raihan Alfiansyah</span>, pelajar RPL di SMK Telkom Lampung. Selain fokus pada <i>software development</i>, saya aktif sebagai Ketua OSIS dan atlet Pencak Silat. Suka membangun hal baru lewat kode!
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-5 py-2 glass rounded-full text-[10px] font-bold uppercase text-accent border-accent/20">Leadership</span>
+                    <span class="px-5 py-2 glass rounded-full text-[10px] font-bold uppercase text-accent border-accent/20">Frontend Dev</span>
+                    <span class="px-5 py-2 glass rounded-full text-[10px] font-bold uppercase text-accent border-accent/20">Silat Athlete</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4" data-aos="fade-up">
+                <div class="glass p-4 rounded-2xl text-center"><i class="fab fa-html5 text-orange-500 text-2xl mb-2"></i><p class="text-[8px] font-bold uppercase">HTML</p></div>
+                <div class="glass p-4 rounded-2xl text-center"><i class="fab fa-js text-yellow-400 text-2xl mb-2"></i><p class="text-[8px] font-bold uppercase">JS</p></div>
+                <div class="glass p-4 rounded-2xl text-center"><i class="fab fa-php text-indigo-400 text-2xl mb-2"></i><p class="text-[8px] font-bold uppercase">PHP</p></div>
+                <div class="glass p-4 rounded-2xl text-center"><i class="fas fa-wind text-cyan-400 text-2xl mb-2"></i><p class="text-[8px] font-bold uppercase">Tailwind</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="karya" class="p-6 pt-16">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-4xl font-extrabold uppercase mb-10 tracking-tighter" data-aos="fade-down">My Works</h2>
+            <div class="grid grid-cols-2 gap-5 auto-rows-[130px]">
+                <a href="https://kadig.netlify.app" target="_blank" class="glass rounded-[2.5rem] overflow-hidden col-span-2 row-span-2 relative group" data-aos="zoom-in">
+                    <img src="KAdig.jpg" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-70">
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/20 to-transparent">
+                        <span class="text-[10px] text-accent font-bold uppercase mb-2">Web Project</span>
+                        <h4 class="font-bold text-2xl uppercase text-white">Kantin Digital (Kadig)</h4>
+                    </div>
+                </a>
+                <div onclick="openDesignModal()" class="glass rounded-[2rem] overflow-hidden cursor-pointer relative group" data-aos="zoom-in">
+                    <img src="Deisgn Pakaian.jpeg" class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all">
+                    <div class="absolute inset-0 flex items-center justify-center p-4 bg-black/40"><h4 class="font-bold text-[10px] uppercase text-white tracking-widest">Visual Art</h4></div>
+                </div>
+                <div onclick="openDesignModal()" class="glass rounded-[2rem] overflow-hidden cursor-pointer relative group" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="Logo.jpeg" class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all">
+                    <div class="absolute inset-0 flex items-center justify-center p-4 bg-black/40"><h4 class="font-bold text-[10px] uppercase text-white tracking-widest">Logo Design</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="designModal" class="glass-modal" onclick="closeDesignModal()">
+        <div class="w-full max-w-sm glass rounded-[2.5rem] overflow-hidden relative shadow-2xl mx-4" onclick="event.stopPropagation()">
+            <button onclick="closeDesignModal()" class="absolute top-5 right-5 text-white z-50 bg-red-600 rounded-full w-10 h-10 flex items-center justify-center">✕</button>
+            <div class="swiper designSwiper aspect-square">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="Deisgn Pakaian.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="Logo.jpeg" class="w-full h-full object-cover"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="p-8 bg-darkcard/95 text-center"><h3 class="text-xl font-extrabold uppercase text-white">Gallery Project</h3></div>
+        </div>
+    </div>
+
+    <nav id="main-nav">
+        <div class="glass rounded-full h-20 flex items-center px-5 shadow-2xl">
+            <div class="flex items-center justify-center border-r border-white/10 pr-5 mr-3">
+                <svg class="h-10 w-auto filter drop-shadow-[0_0_5px_rgba(168,85,247,0.8)]" viewBox="0 0 100 100" fill="none"><rect x="20" y="20" width="12" height="60" rx="2" fill="#A855F7" /><path d="M32 20H55C65 20 70 28 70 37C70 46 65 52 55 52H32V20Z" fill="#A855F7" /><path d="M45 52L70 80H55L32 52H45Z" fill="#A855F7" /></svg>
+            </div>
+            <div class="flex flex-1 justify-around items-center">
+                <button onclick="showSection('home')" id="btn-home" class="nav-btn active flex flex-col items-center gap-1 transition-all"><i class="fas fa-home"></i><span class="text-[8px] font-bold uppercase">Home</span></button>
+                <button onclick="showSection('about')" id="btn-about" class="nav-btn flex flex-col items-center gap-1 transition-all"><i class="fas fa-user"></i><span class="text-[8px] font-bold uppercase">About</span></button>
+                <button onclick="showSection('karya')" id="btn-karya" class="nav-btn flex flex-col items-center gap-1 transition-all"><i class="fas fa-briefcase"></i><span class="text-[8px] font-bold uppercase">Work</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // 3D Card Tilt Effect
+        const card = document.getElementById('id-card');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Custom Cursor
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            outline.style.left = (e.clientX - 16) + 'px';
+            outline.style.top = (e.clientY - 16) + 'px';
+        });
+
+        const mainNav = document.getElementById('main-nav');
+        let currentSection = 'home';
+
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+
+            if (currentSection === 'home') {
+                if (window.pageYOffset > 50) mainNav.classList.add('visible');
+                else mainNav.classList.remove('visible');
+            } else { mainNav.classList.add('visible'); }
+        };
+
+        function showSection(id) {
+            currentSection = id;
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + id).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (id !== 'home' || window.pageYOffset > 50) mainNav.classList.add('visible');
+            else mainNav.classList.remove('visible');
+            AOS.refresh();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        const swiperDesign = new Swiper(".designSwiper", { pagination: { el: ".swiper-pagination", clickable: true }, nested: true });
+        const modal = document.getElementById('designModal');
+        function openDesignModal() { modal.classList.add('active'); setTimeout(() => { swiperDesign.update(); }, 50); }
+        function closeDesignModal() { modal.classList.remove('active'); }
+        
+        new Swiper(".profileSwiper", { loop: true, autoplay: { delay: 3000 } });
+        new Swiper(".prestasiSwiper", { loop: true, autoplay: { delay: 4000 }, pagination: { el: ".swiper-pagination", clickable: true } });
+    </script>
+</body>
+</html>
